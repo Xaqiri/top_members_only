@@ -30,14 +30,18 @@ router.post('/sign-up', (req, res, next) => {
     password: req.body.password,
     membership_status: "Basic"
   });
-  bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-    if (err) return next(err);
-    newUser.password = hashedPassword;
-    newUser.save(err => {
+  if (User.findOne({username: req.body.username})) {
+    res.redirect('/');
+  } else {
+    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
       if (err) return next(err);
-      res.redirect('/');
+      newUser.password = hashedPassword;
+      newUser.save(err => {
+        if (err) return next(err);
+        res.redirect('/');
+      });
     });
-  });
+  }
 });
 
 router.post(
