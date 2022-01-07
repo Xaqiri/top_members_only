@@ -6,11 +6,17 @@ html
   body
     div.nav
       div.nav-home
-        h1 Home 
+        a(href="/") Home
       div.nav-links
         ul 
-          li 
-            h1 Sign-up 
-          li 
-            h1 Sign-in 
+          if !currentUser
+            li 
+              a(href="/sign-up") Sign up
+            li 
+              a(href="/sign-in") Sign in
+          else 
+            li 
+              a(href="/new-message") Post
+            li 
+              a(href="/log-out") Log Out
     block content

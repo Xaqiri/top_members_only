@@ -2,4 +2,14 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  if (currentUser)
+    p Welcome back, #{currentUser.username}
+  else 
+    p Welcome to the message board
+  each message in message_list
+    h1=message.title 
+    h2=message.body
+    if (currentUser)
+      h3=message.user
+      h3=message.timestamp
+
