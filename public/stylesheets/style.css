@@ -42,4 +42,16 @@ form {
   display: flex;
   flex-direction: column;
   width: 25%;
+} 
+
+.message_board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
 }
