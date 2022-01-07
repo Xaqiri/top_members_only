@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   Message.find()
     .exec((err, messages) => { 
       if (err) return next(err);
-      res.render('index', { title: 'Express', message_list: messages });
+      res.render('index', { title: 'Express Message Board', message_list: messages });
     })
 });
 

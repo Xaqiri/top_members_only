@@ -48,10 +48,19 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .message {
   display: flex;
   flex-direction: column;
   border: 2px solid black;
+  padding: 1%;
+  width: 80%;
+}
+
+.message_footer {
+  display: flex;
+  justify-content: space-between;
 }
