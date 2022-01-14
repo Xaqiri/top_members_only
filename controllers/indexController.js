@@ -11,13 +11,19 @@ exports.home = function(req, res, next) {
       })
   };
 
-exports.api_message_get = (req, res, next) => {
+exports.api_messages_get = (req, res, next) => {
     Message.find()
         .exec((err, messages) => {
             if (err) return next(err);
             res.json(messages)
         })
 }
+
+exports.api_loginPost = (req, res) => {
+  jwt.sign();
+}
+
+
 exports.sign_up_get = (req, res, next) => {
     res.render('sign-up');
 };
