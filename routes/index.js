@@ -1,80 +1,24 @@
 var express = require('express');
 var router = express.Router();
-const User = require('../models/user');
-const Message = require('../models/message');
-const passport = require('passport');
-const bcrypt = require('bcryptjs');
+const index_controller = require('../controllers/indexController');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  Message.find()
-    .exec((err, messages) => { 
-      if (err) return next(err);
-      res.render('index', { title: 'Express Message Board', message_list: messages });
-    })
-});
+router.get('/', index_controller.home);
 
-router.get('/sign-up', (req, res, next) => {
-  res.render('sign-up');
-});
+router.get('/api/message', index_controller.api_message_get);
 
-router.get('/sign-in', (req, res, next) => {
-  res.render('sign-in');
-});
+router.get('/sign-up', index_controller.sign_up_get);
 
-router.post('/sign-up', (req, res, next) => {
-  let newUser = User({
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    username: req.body.username,
-    password: req.body.password,
-    membership_status: "Basic"
-  });
-  User.findOne({username: newUser.username})
-    .exec((err, user) => {
-      if (err) return next(err);
-      if (user) res.redirect("/");
-      else {
-        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-          if (err) return next(err);
-          newUser.password = hashedPassword;
-          newUser.save(err => {
-            if (err) return next(err);
-            res.redirect('/sign-in');
-          });
-        });
-      }
-    })
-  });
+router.get('/sign-in', index_controller.sign_in_get);
 
-router.post(
-  "/sign-in",
-  passport.authenticate('local', {
-    successRedirect: "/",
-    failureRedirect: "/"
-  })
-);
+router.post('/sign-up', index_controller.sign_up_post);
 
-router.get('/log-out', (req, res, next) => {
-  req.logout();
-  res.redirect('/');
-});
+router.post("/sign-in", index_controller.sign_in_post);
 
-router.get('/new-message', (req, res, next) => {
-  if (res.locals.currentUser) res.render('new_message')
-  else res.redirect('/sign-in')
-});
+router.get('/log-out', index_controller.log_out);
 
-router.post('/new-message', (req, res, next) => {
-  let newMessage = new Message({
-    title: req.body.title,
-    body: req.body.body,
-    user: res.locals.currentUser.username,
-    timestamp: new Date()
-  });
-  newMessage.save(err => {
-    if (err) return next(err);
-    else res.redirect('/');
-  })
-})
+router.get('/new-message', index_controller.new_message_get);
+
+router.post('/new-message', index_controller.new_message_post);
+
 module.exports = router;
