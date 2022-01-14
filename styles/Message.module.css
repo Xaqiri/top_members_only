@@ -1,0 +1,7 @@
+.message {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    padding: 1em;
+    min-width: 80vw;
+}
