@@ -11,7 +11,7 @@ exports.home = function(req, res, next) {
       })
   };
 
-exports.api_messages_get = (req, res, next) => {
+exports.api_messagesGet = (req, res, next) => {
     Message.find()
         .exec((err, messages) => {
             if (err) return next(err);
@@ -19,8 +19,34 @@ exports.api_messages_get = (req, res, next) => {
         })
 }
 
+exports.api_signupPost = (req, res, next) => {
+  let newUser = User({
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    username: req.body.username,
+    password: req.body.password,
+    membership_status: "Basic"
+  });
+  console.log(newUser);
+  User.findOne({username: newUser.username})
+    .exec((err, user) => {
+      if (err) return next(err);
+      if (user) res.status(400).json({error: 'User already exists'});
+      else {
+        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+          if (err) return next(err);
+          newUser.password = hashedPassword;
+          newUser.save(err => {
+            if (err) return next(err);
+            res.json(newUser);
+          });
+        });
+      }
+    })
+}
+
 exports.api_loginPost = (req, res) => {
-  jwt.sign();
+  res.send('Not implemented')
 }
 
 

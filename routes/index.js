@@ -5,8 +5,10 @@ const index_controller = require('../controllers/indexController');
 /* GET home page. */
 router.get('/', index_controller.home);
 
-router.get('/api/messages', index_controller.api_messages_get);
-router.post('/api/login', index_controller.api_loginPost)
+router.get('/api/messages', index_controller.api_messagesGet);
+router.post('/api/login', index_controller.api_loginPost);
+router.post('/api/signup', index_controller.api_signupPost);
+
 router.get('/sign-up', index_controller.sign_up_get);
 
 router.get('/sign-in', index_controller.sign_in_get);
