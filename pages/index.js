@@ -14,6 +14,7 @@ export default function Home() {
         console.log(messages)
       })
   }, [])
+  
   return (
     <div>
       <Head>
