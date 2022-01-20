@@ -49,7 +49,14 @@ exports.api_messageDelete = (req, res, next) => {
 };
 
 exports.api_messageEdit = (req, res, next) => { 
-  res.send("Not implemented yet");
+  let message = {
+    title: req.body.title,
+    body: req.body.body,
+  };
+  Message.findByIdAndUpdate(req.params.id, message, (err, m) => {
+      if (err) return next(err);
+      res.send("Updated");
+    })
 };
 
 exports.api_signupPost = (req, res, next) => {
