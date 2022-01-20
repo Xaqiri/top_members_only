@@ -52,6 +52,7 @@ exports.api_messageEdit = (req, res, next) => {
   let message = {
     title: req.body.title,
     body: req.body.body,
+    edited_timestamp: new Date()
   };
   Message.findByIdAndUpdate(req.params.id, message, (err, m) => {
       if (err) return next(err);

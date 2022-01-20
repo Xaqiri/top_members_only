@@ -14,6 +14,9 @@ block content
         if (currentUser)
           div.message_footer 
             h3=message.user
-            h3=message.formatted_timestamp
+            if (message.edited_timestamp)
+              h3 Edited at:  #{message.formatted_edit_timestamp}
+            else 
+              h3=message.formatted_timestamp
     
 
