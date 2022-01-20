@@ -8,6 +8,7 @@ router.get('/', index_controller.home);
 router.get('/api/messages', index_controller.api_messagesGet);
 router.post('/api/login', index_controller.api_loginPost);
 router.post('/api/signup', index_controller.api_signupPost);
+router.post('/api/messages', index_controller.api_messageCreate);
 router.get('/api/messages/:id', index_controller.api_messageGet);
 router.delete('/api/messages/:id', index_controller.api_messageDelete);
 router.put('/api/messages/:id', index_controller.api_messageEdit);

@@ -27,6 +27,19 @@ exports.api_messageGet = (req, res, next) => {
     })
 }
 
+exports.api_messageCreate = (req, res, next) => {
+  let newMessage = new Message({
+    title: req.body.title,
+    body: req.body.body,
+    user: req.body.username,
+    timestamp: new Date()
+  });
+  newMessage.save(err => {
+    if (err) return next(err);
+    else res.send("Message created");
+  })
+};
+
 exports.api_messageDelete = (req, res, next) => {
   Message.deleteOne({_id: req.params.id})
     .exec((err, message) => {
