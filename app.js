@@ -13,7 +13,7 @@ const User = require('./models/user');
 const cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-import jwt from 'jsonwebtoken'
+const jwt = require('jsonwebtoken');
 
 const mongoDB = process.env.DB_URI;
 mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true });

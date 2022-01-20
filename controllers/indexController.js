@@ -19,6 +19,26 @@ exports.api_messagesGet = (req, res, next) => {
         })
 }
 
+exports.api_messageGet = (req, res, next) => {
+  Message.findById(req.params.id)
+    .exec((err, message) => {
+      if (err) return next(err);
+      res.json(message);
+    })
+}
+
+exports.api_messageDelete = (req, res, next) => {
+  Message.deleteOne({_id: req.params.id})
+    .exec((err, message) => {
+      if (err) return next(err);
+      res.send("Deleted");
+    })
+};
+
+exports.api_messageEdit = (req, res, next) => { 
+  res.send("Not implemented yet");
+};
+
 exports.api_signupPost = (req, res, next) => {
   let newUser = User({
     first_name: req.body.first_name,
