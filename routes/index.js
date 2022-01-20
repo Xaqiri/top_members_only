@@ -8,6 +8,9 @@ router.get('/', index_controller.home);
 router.get('/api/messages', index_controller.api_messagesGet);
 router.post('/api/login', index_controller.api_loginPost);
 router.post('/api/signup', index_controller.api_signupPost);
+router.get('/api/messages/:id', (req, res, next) => {res.send("Not Implemented")});
+router.delete('/api/messages/:id', (req, res, next) => {res.send("Not Implemented")});
+router.put('/api/messages/:id', (req, res, next) => res.send("Not implemented yet"));
 
 router.get('/sign-up', index_controller.sign_up_get);
 
